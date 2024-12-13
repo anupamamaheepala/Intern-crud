@@ -1,5 +1,5 @@
 body {
-    background-color: #e3e7ec;
+    background-color: #c5e7ff;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -39,27 +39,27 @@ body {
     margin-bottom: 0.5rem; /* Adds spacing between label and input */
     font-size: 14px;
     font-weight: 500;
-    color: #555;
+    color: #000000;
 }
   
 .form-group input {
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #b2b2b2;
+    border-radius: 5px;
     font-size: 14px;
 }
 
 .form-group select {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: 14px;
 }
 
 .form-group textarea {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
     font-size: 14px;
 }
   
