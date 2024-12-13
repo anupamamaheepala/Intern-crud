@@ -1,0 +1,112 @@
+body {
+    background-color: #e3e7ec;
+    font-family: 'Roboto', sans-serif;
+}
+
+.create-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+  
+.create-form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.create-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+  
+.form-group {
+    display: flex;
+    flex-direction: column; /* Ensures label and input are stacked */
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem; /* Adds spacing between label and input */
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+  
+.form-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+  
+.form-group.input-name,
+.form-group.input-mobile,
+.form-group.input-nic,
+.form-group.input-email,
+.form-group.input-address,
+.form-group.input-start-date,
+.form-group.input-end-date,
+.form-group.input-institute,
+.form-group.input-languages,
+.form-group.input-specialization,
+.form-group.input-supervisor,
+.form-group.input-tdate {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.form-group.textarea-assigned-work {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    resize: vertical;
+}
+
+  
+.create-form .create-submit-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+  
+.create-form .create-submit-button:hover {
+    border: 1px solid #007bff;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
