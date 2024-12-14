@@ -19,10 +19,19 @@ const Create = () => {
   });
 
   const specializations = ["Software Engineering", "Data Science", "Networking", "AI", "Web Development"];
-  const supervisors = ["John Doe", "Amalya Damsari", "Jane Smith", "Emily Johnson"];
+  const supervisors = ["Amalya Damsari Dayarathna", "A", "B", "C"];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // Validate mobile number input
+    if (name === "mobile") {
+        const regex = /^[0-9+]*$/; // Allow only numbers and +, allow empty value
+        if (!regex.test(value)) {
+        return; // Do nothing if input is invalid
+        }
+    }
+
     setFormData({ ...formData, [name]: value });
   };
 
@@ -142,6 +151,7 @@ const Create = () => {
             className="input-languages"
             required
           />
+          <small className="create-hint">Enter Programming Languages</small>
         </div>
         <div className="form-group">
           <label htmlFor="specialization">Field of Specialization</label>
