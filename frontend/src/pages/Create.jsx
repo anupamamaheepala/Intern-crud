@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../css/create.css";
+import axios from "axios";
 
 const Create = () => {
   const [formData, setFormData] = useState({
@@ -35,9 +36,22 @@ const Create = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted", formData);
+
+    console.log("Form Data to be submitted:", formData);
+
+    console.log("Submitting form data:", formData); // Debugging log
+    try {
+      const response = await axios.post("http://localhost:5000/trainees", formData, {
+        headers: { "Content-Type": "application/json" }, // Ensure JSON header
+      });
+      console.log("Trainee Created:", response.data); // Debugging log
+      alert(response.data.message); // Display success message
+    } catch (error) {
+      console.error("Error creating trainee:", error.response || error.message);
+      alert("Failed to create trainee.");
+    }
   };
 
   return (
