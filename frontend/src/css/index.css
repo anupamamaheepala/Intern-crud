@@ -1,0 +1,53 @@
+.index-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .index-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .trainee-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-size: 14px;
+  }
+  
+  .trainee-table th,
+  .trainee-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .trainee-table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .trainee-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .trainee-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .error {
+    text-align: center;
+    color: red;
+    font-size: 16px;
+  }
+  

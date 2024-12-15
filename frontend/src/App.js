@@ -29,12 +29,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Create from './pages/Create';
+import Index from './pages/Index';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Create />} />
+        <Route path="/index" element={<Index />} />
       </Routes>
     </Router>
   );
