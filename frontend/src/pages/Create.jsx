@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../css/create.css";
 import axios from "axios";
+import Header from '../components/Header';
 
 const Create = () => {
   const [formData, setFormData] = useState({
@@ -55,6 +56,8 @@ const Create = () => {
   };
 
   return (
+    <>
+    <Header />
     <div className="create-container">
       <form className="create-form" onSubmit={handleSubmit}>
         <h1 className="create-title">Create Trainee</h1>
@@ -228,6 +231,7 @@ const Create = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

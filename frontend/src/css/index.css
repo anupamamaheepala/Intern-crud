@@ -1,3 +1,10 @@
+body {
+  background-color: #c5e7ff;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 .index-container {
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -20,7 +27,7 @@
   
   .trainee-table th,
   .trainee-table td {
-    border: 1px solid #ddd;
+    border: 1px solid #000000;
     padding: 8px;
     text-align: center;
   }

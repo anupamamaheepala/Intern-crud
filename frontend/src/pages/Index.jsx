@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/index.css";
+import Header from '../components/Header';
 
 const Index = () => {
   const [trainees, setTrainees] = useState([]);
@@ -27,6 +28,8 @@ const Index = () => {
   if (error) return <div className="error">{error}</div>;
 
   return (
+    <>
+    <Header />
     <div className="index-container">
       <h1 className="index-title">All Trainees</h1>
       <table className="trainee-table">
@@ -60,6 +63,7 @@ const Index = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 
