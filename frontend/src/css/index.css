@@ -1,5 +1,5 @@
 body {
-  background-color: #c5e7ff;
+  background-color: #ffffff;
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
@@ -33,13 +33,13 @@ body {
   }
   
   .trainee-table th {
-    background-color: #f4f4f4;
+    background-color: #dcdbdb;
     color: #333;
     font-weight: bold;
   }
   
   .trainee-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #dcdbdb;
   }
   
   .trainee-table tr:hover {
@@ -68,12 +68,12 @@ body {
     font-size: 16px;
     width: 80%;
     max-width: 300px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-radius: 4px;
   }
   
   .search-bar:focus {
-    border-color: #007bff;
+    border-color: #000000;
     outline: none;
   }
   
