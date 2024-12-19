@@ -24,22 +24,6 @@ const Create = ({ isEdit }) => {
     assignedWork: "",
   });
 
-  // Fetch trainee data for editing
-  // useEffect(() => {
-  //   if (isEdit && id) {
-  //     const fetchTrainee = async () => {
-  //       try {
-  //         const response = await axios.get(`http://localhost:5000/trainees/${id}`);
-  //         setFormData(response.data); // Pre-fill form with fetched data
-  //       } catch (err) {
-  //         console.error("Failed to fetch trainee data:", err);
-  //         alert("Error fetching trainee data.");
-  //       }
-  //     };
-  //     fetchTrainee();
-  //   }
-  // }, [isEdit, id]);
-
   useEffect(() => {
     console.log("Edit Mode:", isEdit, "ID:", id); // Debugging log
     if (isEdit && id) {
@@ -80,16 +64,50 @@ const Create = ({ isEdit }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     if (isEdit) {
+  //       // Update trainee
+  //       await axios.put(`http://localhost:5000/trainees/${id}`, formData);
+  //       alert("Trainee updated successfully!");
+  //       navigate("/edit-trainees"); // Navigate to trainee list after update
+  //     } else {
+  //       // Create new trainee
+  //       await axios.post("http://localhost:5000/trainees", formData);
+  //       alert("Trainee created successfully!");
+  //       setFormData({
+  //         name: "",
+  //         mobile: "",
+  //         nic: "",
+  //         email: "",
+  //         address: "",
+  //         startDate: "",
+  //         endDate: "",
+  //         institute: "",
+  //         languages: "",
+  //         specialization: "",
+  //         supervisor: "",
+  //         tdate: "",
+  //         assignedWork: "",
+  //       }); // Reset form after creation
+  //     }
+  //   } catch (err) {
+  //     console.error("Error submitting form:", err);
+  //     alert("Operation failed.");
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (isEdit) {
-        // Update trainee
+        console.log("Updating trainee with ID:", id); // Debugging log
+        console.log("Data being sent:", formData); // Debugging log
         await axios.put(`http://localhost:5000/trainees/${id}`, formData);
         alert("Trainee updated successfully!");
-        navigate("/edit-trainees"); // Navigate to trainee list after update
+        navigate("/EditTrainees"); // Navigate back to trainee list
       } else {
-        // Create new trainee
         await axios.post("http://localhost:5000/trainees", formData);
         alert("Trainee created successfully!");
         setFormData({
@@ -106,10 +124,10 @@ const Create = ({ isEdit }) => {
           supervisor: "",
           tdate: "",
           assignedWork: "",
-        }); // Reset form after creation
+        }); // Reset the form
       }
     } catch (err) {
-      console.error("Error submitting form:", err);
+      console.error("Error submitting form:", err.response || err.message);
       alert("Operation failed.");
     }
   };

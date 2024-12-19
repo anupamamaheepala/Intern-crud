@@ -1,28 +1,3 @@
-# from flask import Flask, jsonify
-# from flask_pymongo import PyMongo
-# from pymongo.errors import ConnectionFailure
-
-# # Initialize the Flask application
-# app = Flask(__name__)
-
-# # Load configuration from config.py
-# app.config.from_object('config.Config')
-
-# # Initialize PyMongo with the Flask app
-# mongo = PyMongo(app)
-
-# @app.route('/ping_db')
-# def ping_db():
-#     try:
-#         # The ping command checks the connection to the database
-#         mongo.cx.admin.command('ping')
-#         return jsonify({"status": "success", "message": "Database connection is healthy."}), 200
-#     except ConnectionFailure:
-#         return jsonify({"status": "fail", "message": "Database connection failed."}), 500
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
-
 from flask import Flask, jsonify, request
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
@@ -59,11 +34,6 @@ def create_trainee():
     result = trainee_collection.insert_one(data)
     return jsonify({"message": "Trainee created successfully", "id": str(result.inserted_id)}), 201
 
-# @app.route('/trainees', methods=['GET'])
-# def get_all_trainees():
-#     """Get all trainees."""
-#     trainees = list(trainee_collection.find({}, {"_id": 0}))  # Exclude MongoDB `_id` in response
-#     return jsonify(trainees), 200
 
 @app.route('/trainees', methods=['GET'])
 def get_all_trainees():
@@ -81,14 +51,6 @@ def get_all_trainees():
 
 
 
-# @app.route('/trainees/<string:trainee_id>', methods=['GET'])
-# def get_trainee(trainee_id):
-#     """Get a trainee by ID."""
-#     trainee = trainee_collection.find_one({"_id": trainee_id}, {"_id": 0})
-#     if not trainee:
-#         return jsonify({"message": "Trainee not found"}), 404
-#     return jsonify(trainee), 200
-
 @app.route('/trainees/<string:trainee_id>', methods=['GET'])
 def get_trainee(trainee_id):
     """Get a trainee by ID."""
@@ -100,22 +62,30 @@ def get_trainee(trainee_id):
     except Exception as e:
         return jsonify({"message": f"Error: {str(e)}"}), 500
 
+# @app.route('/trainees/<string:trainee_id>', methods=['PUT'])
+# def update_trainee(trainee_id):
+#     """Update a trainee by ID."""
+#     data = request.json
+#     result = trainee_collection.update_one({"_id": trainee_id}, {"$set": data})
+#     if result.matched_count == 0:
+#         return jsonify({"message": "Trainee not found"}), 404
+#     return jsonify({"message": "Trainee updated successfully"}), 200
+
 @app.route('/trainees/<string:trainee_id>', methods=['PUT'])
 def update_trainee(trainee_id):
     """Update a trainee by ID."""
-    data = request.json
-    result = trainee_collection.update_one({"_id": trainee_id}, {"$set": data})
-    if result.matched_count == 0:
-        return jsonify({"message": "Trainee not found"}), 404
-    return jsonify({"message": "Trainee updated successfully"}), 200
+    if not ObjectId.is_valid(trainee_id):  # Validate if trainee_id is a valid ObjectId
+        return jsonify({"message": "Invalid trainee ID"}), 400
 
-# @app.route('/trainees/<string:trainee_id>', methods=['DELETE'])
-# def delete_trainee(trainee_id):
-#     """Delete a trainee by ID."""
-#     result = trainee_collection.delete_one({"_id": trainee_id})
-#     if result.deleted_count == 0:
-#         return jsonify({"message": "Trainee not found"}), 404
-#     return jsonify({"message": "Trainee deleted successfully"}), 200
+    try:
+        data = request.json  # Get the update data from the request body
+        result = trainee_collection.update_one({"_id": ObjectId(trainee_id)}, {"$set": data})
+        if result.matched_count == 0:
+            return jsonify({"message": "Trainee not found"}), 404
+        return jsonify({"message": "Trainee updated successfully"}), 200
+    except Exception as e:
+        return jsonify({"message": f"Error updating trainee: {str(e)}"}), 500
+
 
 @app.route('/trainees/<string:trainee_id>', methods=['DELETE'])
 def delete_trainee(trainee_id):
