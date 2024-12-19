@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import "../css/create.css";
 import axios from "axios";
 import Header from '../components/Header';
 
-const Create = () => {
+const Create = ({ isEdit }) => {
+  const { id } = useParams(); // Get trainee ID from URL
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
@@ -20,8 +24,47 @@ const Create = () => {
     assignedWork: "",
   });
 
-  const specializations = ["Software Engineering", "Data Science", "Networking", "AI", "Web Development"];
-  const supervisors = ["Amalya Damsari Dayarathna", "A", "B", "C"];
+  // Fetch trainee data for editing
+  // useEffect(() => {
+  //   if (isEdit && id) {
+  //     const fetchTrainee = async () => {
+  //       try {
+  //         const response = await axios.get(`http://localhost:5000/trainees/${id}`);
+  //         setFormData(response.data); // Pre-fill form with fetched data
+  //       } catch (err) {
+  //         console.error("Failed to fetch trainee data:", err);
+  //         alert("Error fetching trainee data.");
+  //       }
+  //     };
+  //     fetchTrainee();
+  //   }
+  // }, [isEdit, id]);
+
+  useEffect(() => {
+    console.log("Edit Mode:", isEdit, "ID:", id); // Debugging log
+    if (isEdit && id) {
+      const fetchTrainee = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5000/trainees/${id}`);
+          if (response.data) {
+            setFormData(response.data); // Pre-fill the form
+          } else {
+            alert("Trainee not found.");
+            navigate("/edit-trainees"); // Redirect if not found
+          }
+        } catch (err) {
+          console.error("Error fetching trainee data:", err);
+          alert("Error fetching trainee data.");
+          navigate("/edit-trainees");
+        }
+      };
+      fetchTrainee();
+    }
+  }, [isEdit, id, navigate]);  
+  
+
+  const specializations = ["Software Engineering", "Data Science", "Networking", "AI", "Web Development, Cyber Security"];
+  const supervisors = ["Amalya Damsari Dayarathna", "Jaya Mohan", "Nishantha Alwis", "Buthsara Geeganage"];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,19 +82,35 @@ const Create = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("Form Data to be submitted:", formData);
-
-    console.log("Submitting form data:", formData); // Debugging log
     try {
-      const response = await axios.post("http://localhost:5000/trainees", formData, {
-        headers: { "Content-Type": "application/json" }, // Ensure JSON header
-      });
-      console.log("Trainee Created:", response.data); // Debugging log
-      alert(response.data.message); // Display success message
-    } catch (error) {
-      console.error("Error creating trainee:", error.response || error.message);
-      alert("Failed to create trainee.");
+      if (isEdit) {
+        // Update trainee
+        await axios.put(`http://localhost:5000/trainees/${id}`, formData);
+        alert("Trainee updated successfully!");
+        navigate("/edit-trainees"); // Navigate to trainee list after update
+      } else {
+        // Create new trainee
+        await axios.post("http://localhost:5000/trainees", formData);
+        alert("Trainee created successfully!");
+        setFormData({
+          name: "",
+          mobile: "",
+          nic: "",
+          email: "",
+          address: "",
+          startDate: "",
+          endDate: "",
+          institute: "",
+          languages: "",
+          specialization: "",
+          supervisor: "",
+          tdate: "",
+          assignedWork: "",
+        }); // Reset form after creation
+      }
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      alert("Operation failed.");
     }
   };
 
@@ -227,7 +286,7 @@ const Create = () => {
           />
         </div>
         <button type="submit" className="create-submit-button">
-          Create
+          {isEdit ? "Update" : "Create"}
         </button>
       </form>
     </div>
