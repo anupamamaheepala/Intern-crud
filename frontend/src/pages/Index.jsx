@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import * as XLSX from "xlsx";
 import "../css/index.css";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -40,6 +41,14 @@ const Index = () => {
       trainee.specialization.toLowerCase().includes(query)
     );
     setFilteredTrainees(filtered);
+  };
+
+  // Export to Excel
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(filteredTrainees); // Convert JSON to worksheet
+    const workbook = XLSX.utils.book_new(); // Create a new workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Trainees"); // Append worksheet to workbook
+    XLSX.writeFile(workbook, "Trainees.xlsx"); // Save file as Trainees.xlsx
   };
 
   if (loading) return <div className="loading">Loading trainees...</div>;
@@ -94,6 +103,11 @@ const Index = () => {
             ))}
           </tbody>
         </table>
+        <div className="export-button-container">
+          <button onClick={exportToExcel} className="export-button">
+            Export to Excel
+          </button>
+        </div>
       </div>
       <Footer />
     </>

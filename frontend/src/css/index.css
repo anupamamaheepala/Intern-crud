@@ -77,3 +77,23 @@ body {
     outline: none;
   }
   
+  .export-button-container {
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  .export-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .export-button:hover {
+    background-color: #45a049;
+  }
+  
