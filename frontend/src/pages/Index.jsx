@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/index.css";
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Index = () => {
   const [trainees, setTrainees] = useState([]);
@@ -94,6 +95,7 @@ const Index = () => {
           </tbody>
         </table>
       </div>
+      <Footer />
     </>
   );
 };

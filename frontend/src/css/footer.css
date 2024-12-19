@@ -1,0 +1,12 @@
+.footer {
+    background-color: #6bbffa; /* Dark background */
+    color: rgb(0, 0, 0); /* White text */
+    text-align: center; /* Center-align text */
+    padding: 2px 0; /* Add vertical spacing */
+    font-size: 14px; /* Set font size */
+    position: fixed; /* Make footer stick to the bottom */
+    bottom: 0;
+    width: 100%; /* Make footer span the full width */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
+  }
+  
