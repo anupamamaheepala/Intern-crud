@@ -47,7 +47,7 @@ const Create = ({ isEdit }) => {
   }, [isEdit, id, navigate]);  
   
 
-  const specializations = ["Software Engineering", "Data Science", "Networking", "AI", "Web Development, Cyber Security"];
+  const specializations = ["Software Engineering", "Data Science", "Networking", "AI", "Web Development", "Cyber Security"];
   const supervisors = ["Amalya Damsari Dayarathna", "Jaya Mohan", "Nishantha Alwis", "Buthsara Geeganage"];
 
   const handleChange = (e) => {
